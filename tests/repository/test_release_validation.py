@@ -4,6 +4,7 @@ from scripts.validate_release import (
     SECRET_PATTERNS,
     _contains_internal_process_language,
     _contains_prohibited_company_prose,
+    _contains_resolved_registry_url,
     validate,
 )
 
@@ -49,3 +50,12 @@ def test_internal_package_feeds_are_rejected() -> None:
         "https://pkgs.dev." + "azure.com/example/_packaging/npm/registry/"
     )
     assert not pattern.search("https://registry.npmjs.org/package")
+
+
+def test_resolved_registry_urls_are_rejected() -> None:
+    assert _contains_resolved_registry_url(
+        {"packages": {"node_modules/example": {"resolved": "https://registry.example"}}}
+    )
+    assert not _contains_resolved_registry_url(
+        {"packages": {"node_modules/example": {"integrity": "sha512-example"}}}
+    )

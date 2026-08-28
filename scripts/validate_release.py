@@ -163,6 +163,11 @@ def validate() -> list[str]:
     package = json.loads((ROOT / "package.json").read_text(encoding="utf-8"))
     if package.get("license") != "MIT":
         errors.append("package.json must declare MIT.")
+    package_lock = json.loads(
+        (ROOT / "package-lock.json").read_text(encoding="utf-8")
+    )
+    if _contains_resolved_registry_url(package_lock):
+        errors.append("package-lock.json must not pin registry URLs.")
     pyproject = (ROOT / "pyproject.toml").read_text(encoding="utf-8")
     if 'license = "MIT"' not in pyproject:
         errors.append("pyproject.toml must declare MIT.")
@@ -193,6 +198,22 @@ def _contains_prohibited_company_prose(content: str) -> bool:
 
 def _contains_internal_process_language(content: str) -> bool:
     return INTERNAL_PROCESS_LANGUAGE.search(content) is not None
+
+
+def _contains_resolved_registry_url(value: object) -> bool:
+    if isinstance(value, dict):
+        return any(
+            (
+                key == "resolved"
+                and isinstance(child, str)
+                and child.startswith(("http://", "https://"))
+            )
+            or _contains_resolved_registry_url(child)
+            for key, child in value.items()
+        )
+    if isinstance(value, list):
+        return any(_contains_resolved_registry_url(child) for child in value)
+    return False
 
 
 def _validate_documentation_index(files: list[Path]) -> list[str]:

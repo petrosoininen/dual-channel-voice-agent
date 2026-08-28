@@ -1,0 +1,1764 @@
+{
+  "$defs": {
+    "AppendListItemOperation": {
+      "additionalProperties": false,
+      "description": "Append a classified value; the service creates the stable item ID.",
+      "properties": {
+        "operationId": {
+          "format": "uuid",
+          "title": "Operationid",
+          "type": "string"
+        },
+        "op": {
+          "const": "append_list_item",
+          "title": "Op",
+          "type": "string"
+        },
+        "section": {
+          "enum": [
+            "supportingSignals",
+            "stakeholders",
+            "assumptionsAndUncertainties",
+            "missingEvidence",
+            "recommendedNextActions"
+          ],
+          "title": "Section",
+          "type": "string"
+        },
+        "value": {
+          "$ref": "#/$defs/ClassifiedText"
+        }
+      },
+      "required": [
+        "operationId",
+        "op",
+        "section",
+        "value"
+      ],
+      "title": "AppendListItemOperation",
+      "type": "object"
+    },
+    "CancellationPhase": {
+      "description": "Point at which cancellation completed.",
+      "enum": [
+        "queued",
+        "running"
+      ],
+      "title": "CancellationPhase",
+      "type": "string"
+    },
+    "ClaimClassification": {
+      "description": "Allowed provenance classification for every opportunity claim.",
+      "enum": [
+        "synthetic_evidence",
+        "inference",
+        "unknown"
+      ],
+      "title": "ClaimClassification",
+      "type": "string"
+    },
+    "ClassifiedText": {
+      "additionalProperties": false,
+      "description": "A claim and its explicit provenance.",
+      "properties": {
+        "text": {
+          "maxLength": 2000,
+          "minLength": 1,
+          "title": "Text",
+          "type": "string"
+        },
+        "classification": {
+          "$ref": "#/$defs/ClaimClassification"
+        },
+        "sourceLabel": {
+          "anyOf": [
+            {
+              "maxLength": 120,
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Sourcelabel"
+        }
+      },
+      "required": [
+        "text",
+        "classification"
+      ],
+      "title": "ClassifiedText",
+      "type": "object"
+    },
+    "DocumentCommittedEvent": {
+      "additionalProperties": false,
+      "properties": {
+        "eventId": {
+          "format": "uuid",
+          "title": "Eventid",
+          "type": "string"
+        },
+        "idempotencyKey": {
+          "format": "uuid",
+          "title": "Idempotencykey",
+          "type": "string"
+        },
+        "sessionId": {
+          "format": "uuid",
+          "title": "Sessionid",
+          "type": "string"
+        },
+        "turnId": {
+          "format": "uuid",
+          "title": "Turnid",
+          "type": "string"
+        },
+        "timestamp": {
+          "format": "date-time",
+          "title": "Timestamp",
+          "type": "string"
+        },
+        "type": {
+          "const": "document.committed",
+          "title": "Type",
+          "type": "string"
+        },
+        "documentId": {
+          "format": "uuid",
+          "title": "Documentid",
+          "type": "string"
+        },
+        "version": {
+          "minimum": 1,
+          "title": "Version",
+          "type": "integer"
+        },
+        "document": {
+          "$ref": "#/$defs/OpportunityDocument"
+        },
+        "markdownProjection": {
+          "maxLength": 16000,
+          "title": "Markdownprojection",
+          "type": "string"
+        },
+        "sourceLabels": {
+          "default": [],
+          "items": {
+            "maxLength": 120,
+            "minLength": 1,
+            "type": "string"
+          },
+          "maxItems": 16,
+          "title": "Sourcelabels",
+          "type": "array"
+        },
+        "restoredFromVersion": {
+          "anyOf": [
+            {
+              "minimum": 1,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Restoredfromversion"
+        }
+      },
+      "required": [
+        "eventId",
+        "idempotencyKey",
+        "sessionId",
+        "turnId",
+        "timestamp",
+        "type",
+        "documentId",
+        "version",
+        "document",
+        "markdownProjection"
+      ],
+      "title": "DocumentCommittedEvent",
+      "type": "object"
+    },
+    "DocumentCreatedEvent": {
+      "additionalProperties": false,
+      "properties": {
+        "eventId": {
+          "format": "uuid",
+          "title": "Eventid",
+          "type": "string"
+        },
+        "idempotencyKey": {
+          "format": "uuid",
+          "title": "Idempotencykey",
+          "type": "string"
+        },
+        "sessionId": {
+          "format": "uuid",
+          "title": "Sessionid",
+          "type": "string"
+        },
+        "turnId": {
+          "format": "uuid",
+          "title": "Turnid",
+          "type": "string"
+        },
+        "timestamp": {
+          "format": "date-time",
+          "title": "Timestamp",
+          "type": "string"
+        },
+        "type": {
+          "const": "document.created",
+          "title": "Type",
+          "type": "string"
+        },
+        "documentId": {
+          "format": "uuid",
+          "title": "Documentid",
+          "type": "string"
+        },
+        "version": {
+          "minimum": 1,
+          "title": "Version",
+          "type": "integer"
+        },
+        "document": {
+          "$ref": "#/$defs/OpportunityDocument"
+        },
+        "markdownProjection": {
+          "maxLength": 16000,
+          "title": "Markdownprojection",
+          "type": "string"
+        },
+        "sourceLabels": {
+          "default": [],
+          "items": {
+            "maxLength": 120,
+            "minLength": 1,
+            "type": "string"
+          },
+          "maxItems": 16,
+          "title": "Sourcelabels",
+          "type": "array"
+        }
+      },
+      "required": [
+        "eventId",
+        "idempotencyKey",
+        "sessionId",
+        "turnId",
+        "timestamp",
+        "type",
+        "documentId",
+        "version",
+        "document",
+        "markdownProjection"
+      ],
+      "title": "DocumentCreatedEvent",
+      "type": "object"
+    },
+    "DocumentFailedEvent": {
+      "additionalProperties": false,
+      "properties": {
+        "eventId": {
+          "format": "uuid",
+          "title": "Eventid",
+          "type": "string"
+        },
+        "idempotencyKey": {
+          "format": "uuid",
+          "title": "Idempotencykey",
+          "type": "string"
+        },
+        "sessionId": {
+          "format": "uuid",
+          "title": "Sessionid",
+          "type": "string"
+        },
+        "turnId": {
+          "format": "uuid",
+          "title": "Turnid",
+          "type": "string"
+        },
+        "timestamp": {
+          "format": "date-time",
+          "title": "Timestamp",
+          "type": "string"
+        },
+        "type": {
+          "const": "document.failed",
+          "title": "Type",
+          "type": "string"
+        },
+        "documentId": {
+          "format": "uuid",
+          "title": "Documentid",
+          "type": "string"
+        },
+        "error": {
+          "$ref": "#/$defs/SanitizedError"
+        }
+      },
+      "required": [
+        "eventId",
+        "idempotencyKey",
+        "sessionId",
+        "turnId",
+        "timestamp",
+        "type",
+        "documentId",
+        "error"
+      ],
+      "title": "DocumentFailedEvent",
+      "type": "object"
+    },
+    "DocumentListItem": {
+      "additionalProperties": false,
+      "description": "Classified list item with an app-owned stable identity.",
+      "properties": {
+        "text": {
+          "maxLength": 2000,
+          "minLength": 1,
+          "title": "Text",
+          "type": "string"
+        },
+        "classification": {
+          "$ref": "#/$defs/ClaimClassification"
+        },
+        "sourceLabel": {
+          "anyOf": [
+            {
+              "maxLength": 120,
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Sourcelabel"
+        },
+        "itemId": {
+          "format": "uuid",
+          "title": "Itemid",
+          "type": "string"
+        }
+      },
+      "required": [
+        "text",
+        "classification",
+        "itemId"
+      ],
+      "title": "DocumentListItem",
+      "type": "object"
+    },
+    "DocumentPatchEvent": {
+      "additionalProperties": false,
+      "properties": {
+        "eventId": {
+          "format": "uuid",
+          "title": "Eventid",
+          "type": "string"
+        },
+        "idempotencyKey": {
+          "format": "uuid",
+          "title": "Idempotencykey",
+          "type": "string"
+        },
+        "sessionId": {
+          "format": "uuid",
+          "title": "Sessionid",
+          "type": "string"
+        },
+        "turnId": {
+          "format": "uuid",
+          "title": "Turnid",
+          "type": "string"
+        },
+        "timestamp": {
+          "format": "date-time",
+          "title": "Timestamp",
+          "type": "string"
+        },
+        "type": {
+          "const": "document.patch",
+          "title": "Type",
+          "type": "string"
+        },
+        "documentId": {
+          "format": "uuid",
+          "title": "Documentid",
+          "type": "string"
+        },
+        "baseVersion": {
+          "minimum": 0,
+          "title": "Baseversion",
+          "type": "integer"
+        },
+        "version": {
+          "minimum": 1,
+          "title": "Version",
+          "type": "integer"
+        },
+        "patch": {
+          "$ref": "#/$defs/DocumentPatchProposal"
+        }
+      },
+      "required": [
+        "eventId",
+        "idempotencyKey",
+        "sessionId",
+        "turnId",
+        "timestamp",
+        "type",
+        "documentId",
+        "baseVersion",
+        "version",
+        "patch"
+      ],
+      "title": "DocumentPatchEvent",
+      "type": "object"
+    },
+    "DocumentPatchProposal": {
+      "additionalProperties": false,
+      "description": "Complete atomic semantic patch proposal.",
+      "properties": {
+        "patchId": {
+          "format": "uuid",
+          "title": "Patchid",
+          "type": "string"
+        },
+        "sessionId": {
+          "format": "uuid",
+          "title": "Sessionid",
+          "type": "string"
+        },
+        "turnId": {
+          "format": "uuid",
+          "title": "Turnid",
+          "type": "string"
+        },
+        "documentId": {
+          "format": "uuid",
+          "title": "Documentid",
+          "type": "string"
+        },
+        "baseVersion": {
+          "minimum": 0,
+          "title": "Baseversion",
+          "type": "integer"
+        },
+        "summary": {
+          "maxLength": 500,
+          "minLength": 1,
+          "title": "Summary",
+          "type": "string"
+        },
+        "operations": {
+          "items": {
+            "discriminator": {
+              "mapping": {
+                "append_list_item": "#/$defs/AppendListItemOperation",
+                "remove_list_item": "#/$defs/RemoveListItemOperation",
+                "replace_section": "#/$defs/ReplaceSectionOperation",
+                "set_field": "#/$defs/SetFieldOperation",
+                "update_list_item": "#/$defs/UpdateListItemOperation"
+              },
+              "propertyName": "op"
+            },
+            "oneOf": [
+              {
+                "$ref": "#/$defs/SetFieldOperation"
+              },
+              {
+                "$ref": "#/$defs/ReplaceSectionOperation"
+              },
+              {
+                "$ref": "#/$defs/AppendListItemOperation"
+              },
+              {
+                "$ref": "#/$defs/UpdateListItemOperation"
+              },
+              {
+                "$ref": "#/$defs/RemoveListItemOperation"
+              }
+            ]
+          },
+          "maxItems": 32,
+          "title": "Operations",
+          "type": "array"
+        },
+        "reason": {
+          "anyOf": [
+            {
+              "maxLength": 240,
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Reason"
+        }
+      },
+      "required": [
+        "patchId",
+        "sessionId",
+        "turnId",
+        "documentId",
+        "baseVersion",
+        "summary",
+        "operations"
+      ],
+      "title": "DocumentPatchProposal",
+      "type": "object"
+    },
+    "DocumentPendingEvent": {
+      "additionalProperties": false,
+      "properties": {
+        "eventId": {
+          "format": "uuid",
+          "title": "Eventid",
+          "type": "string"
+        },
+        "idempotencyKey": {
+          "format": "uuid",
+          "title": "Idempotencykey",
+          "type": "string"
+        },
+        "sessionId": {
+          "format": "uuid",
+          "title": "Sessionid",
+          "type": "string"
+        },
+        "turnId": {
+          "format": "uuid",
+          "title": "Turnid",
+          "type": "string"
+        },
+        "timestamp": {
+          "format": "date-time",
+          "title": "Timestamp",
+          "type": "string"
+        },
+        "type": {
+          "const": "document.pending",
+          "title": "Type",
+          "type": "string"
+        },
+        "documentId": {
+          "format": "uuid",
+          "title": "Documentid",
+          "type": "string"
+        },
+        "title": {
+          "maxLength": 160,
+          "minLength": 1,
+          "title": "Title",
+          "type": "string"
+        }
+      },
+      "required": [
+        "eventId",
+        "idempotencyKey",
+        "sessionId",
+        "turnId",
+        "timestamp",
+        "type",
+        "documentId",
+        "title"
+      ],
+      "title": "DocumentPendingEvent",
+      "type": "object"
+    },
+    "DocumentResultStatus": {
+      "description": "Independent document-lane terminal state.",
+      "enum": [
+        "not_started",
+        "pending",
+        "committed",
+        "no_op",
+        "failed",
+        "cancelled",
+        "rejected"
+      ],
+      "title": "DocumentResultStatus",
+      "type": "string"
+    },
+    "DocumentStatus": {
+      "description": "Refinement state for the opportunity document.",
+      "enum": [
+        "draft",
+        "refining",
+        "ready_for_validation"
+      ],
+      "title": "DocumentStatus",
+      "type": "string"
+    },
+    "OpportunityDocument": {
+      "additionalProperties": false,
+      "description": "Canonical, bounded opportunity document projection.",
+      "properties": {
+        "documentId": {
+          "format": "uuid",
+          "title": "Documentid",
+          "type": "string"
+        },
+        "version": {
+          "minimum": 0,
+          "title": "Version",
+          "type": "integer"
+        },
+        "title": {
+          "maxLength": 160,
+          "minLength": 1,
+          "title": "Title",
+          "type": "string"
+        },
+        "status": {
+          "$ref": "#/$defs/DocumentStatus"
+        },
+        "customerGoal": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ClassifiedText"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "currentSituation": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ClassifiedText"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "opportunityHypothesis": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ClassifiedText"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "supportingSignals": {
+          "items": {
+            "$ref": "#/$defs/DocumentListItem"
+          },
+          "maxItems": 24,
+          "title": "Supportingsignals",
+          "type": "array"
+        },
+        "expectedValue": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ClassifiedText"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "stakeholders": {
+          "items": {
+            "$ref": "#/$defs/DocumentListItem"
+          },
+          "maxItems": 16,
+          "title": "Stakeholders",
+          "type": "array"
+        },
+        "assumptionsAndUncertainties": {
+          "items": {
+            "$ref": "#/$defs/DocumentListItem"
+          },
+          "maxItems": 24,
+          "title": "Assumptionsanduncertainties",
+          "type": "array"
+        },
+        "missingEvidence": {
+          "items": {
+            "$ref": "#/$defs/DocumentListItem"
+          },
+          "maxItems": 24,
+          "title": "Missingevidence",
+          "type": "array"
+        },
+        "recommendedNextActions": {
+          "items": {
+            "$ref": "#/$defs/DocumentListItem"
+          },
+          "maxItems": 24,
+          "title": "Recommendednextactions",
+          "type": "array"
+        },
+        "confidenceAndRationale": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ClassifiedText"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "documentId",
+        "version",
+        "title",
+        "status",
+        "customerGoal",
+        "currentSituation",
+        "opportunityHypothesis",
+        "supportingSignals",
+        "expectedValue",
+        "stakeholders",
+        "assumptionsAndUncertainties",
+        "missingEvidence",
+        "recommendedNextActions",
+        "confidenceAndRationale"
+      ],
+      "title": "OpportunityDocument",
+      "type": "object"
+    },
+    "RemoveListItemOperation": {
+      "additionalProperties": false,
+      "description": "Remove a known list item by stable ID.",
+      "properties": {
+        "operationId": {
+          "format": "uuid",
+          "title": "Operationid",
+          "type": "string"
+        },
+        "op": {
+          "const": "remove_list_item",
+          "title": "Op",
+          "type": "string"
+        },
+        "section": {
+          "enum": [
+            "supportingSignals",
+            "stakeholders",
+            "assumptionsAndUncertainties",
+            "missingEvidence",
+            "recommendedNextActions"
+          ],
+          "title": "Section",
+          "type": "string"
+        },
+        "itemId": {
+          "format": "uuid",
+          "title": "Itemid",
+          "type": "string"
+        }
+      },
+      "required": [
+        "operationId",
+        "op",
+        "section",
+        "itemId"
+      ],
+      "title": "RemoveListItemOperation",
+      "type": "object"
+    },
+    "ReplaceSectionOperation": {
+      "additionalProperties": false,
+      "description": "Replace one scalar claim section.",
+      "properties": {
+        "operationId": {
+          "format": "uuid",
+          "title": "Operationid",
+          "type": "string"
+        },
+        "op": {
+          "const": "replace_section",
+          "title": "Op",
+          "type": "string"
+        },
+        "section": {
+          "enum": [
+            "customerGoal",
+            "currentSituation",
+            "opportunityHypothesis",
+            "expectedValue",
+            "confidenceAndRationale"
+          ],
+          "title": "Section",
+          "type": "string"
+        },
+        "value": {
+          "$ref": "#/$defs/ClassifiedText"
+        }
+      },
+      "required": [
+        "operationId",
+        "op",
+        "section",
+        "value"
+      ],
+      "title": "ReplaceSectionOperation",
+      "type": "object"
+    },
+    "SanitizedError": {
+      "additionalProperties": false,
+      "description": "Bounded client-visible error without exception or provider content.",
+      "properties": {
+        "code": {
+          "$ref": "#/$defs/SanitizedErrorCode"
+        },
+        "category": {
+          "$ref": "#/$defs/SanitizedErrorCategory"
+        },
+        "message": {
+          "maxLength": 240,
+          "minLength": 1,
+          "title": "Message",
+          "type": "string"
+        },
+        "retryable": {
+          "title": "Retryable",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "code",
+        "category",
+        "message",
+        "retryable"
+      ],
+      "title": "SanitizedError",
+      "type": "object"
+    },
+    "SanitizedErrorCategory": {
+      "description": "Safe client-facing error categories.",
+      "enum": [
+        "command",
+        "turn",
+        "voice",
+        "document"
+      ],
+      "title": "SanitizedErrorCategory",
+      "type": "string"
+    },
+    "SanitizedErrorCode": {
+      "description": "Public error identities that never include provider details.",
+      "enum": [
+        "validation_error",
+        "conflict",
+        "queue_full",
+        "cancelled",
+        "internal_error"
+      ],
+      "title": "SanitizedErrorCode",
+      "type": "string"
+    },
+    "SetFieldOperation": {
+      "additionalProperties": false,
+      "description": "Set an allowlisted scalar field with field-specific validation.",
+      "properties": {
+        "operationId": {
+          "format": "uuid",
+          "title": "Operationid",
+          "type": "string"
+        },
+        "op": {
+          "const": "set_field",
+          "title": "Op",
+          "type": "string"
+        },
+        "field": {
+          "enum": [
+            "title",
+            "status"
+          ],
+          "title": "Field",
+          "type": "string"
+        },
+        "value": {
+          "maxLength": 160,
+          "minLength": 1,
+          "title": "Value",
+          "type": "string"
+        }
+      },
+      "required": [
+        "operationId",
+        "op",
+        "field",
+        "value"
+      ],
+      "title": "SetFieldOperation",
+      "type": "object"
+    },
+    "TurnAnalysisCancelledEvent": {
+      "additionalProperties": false,
+      "properties": {
+        "eventId": {
+          "format": "uuid",
+          "title": "Eventid",
+          "type": "string"
+        },
+        "idempotencyKey": {
+          "format": "uuid",
+          "title": "Idempotencykey",
+          "type": "string"
+        },
+        "sessionId": {
+          "format": "uuid",
+          "title": "Sessionid",
+          "type": "string"
+        },
+        "turnId": {
+          "format": "uuid",
+          "title": "Turnid",
+          "type": "string"
+        },
+        "timestamp": {
+          "format": "date-time",
+          "title": "Timestamp",
+          "type": "string"
+        },
+        "type": {
+          "const": "turn.analysis.cancelled",
+          "title": "Type",
+          "type": "string"
+        },
+        "phase": {
+          "$ref": "#/$defs/CancellationPhase"
+        }
+      },
+      "required": [
+        "eventId",
+        "idempotencyKey",
+        "sessionId",
+        "turnId",
+        "timestamp",
+        "type",
+        "phase"
+      ],
+      "title": "TurnAnalysisCancelledEvent",
+      "type": "object"
+    },
+    "TurnAnalysisCancellingEvent": {
+      "additionalProperties": false,
+      "properties": {
+        "eventId": {
+          "format": "uuid",
+          "title": "Eventid",
+          "type": "string"
+        },
+        "idempotencyKey": {
+          "format": "uuid",
+          "title": "Idempotencykey",
+          "type": "string"
+        },
+        "sessionId": {
+          "format": "uuid",
+          "title": "Sessionid",
+          "type": "string"
+        },
+        "turnId": {
+          "format": "uuid",
+          "title": "Turnid",
+          "type": "string"
+        },
+        "timestamp": {
+          "format": "date-time",
+          "title": "Timestamp",
+          "type": "string"
+        },
+        "type": {
+          "const": "turn.analysis.cancelling",
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "eventId",
+        "idempotencyKey",
+        "sessionId",
+        "turnId",
+        "timestamp",
+        "type"
+      ],
+      "title": "TurnAnalysisCancellingEvent",
+      "type": "object"
+    },
+    "TurnAnalysisCompletedEvent": {
+      "additionalProperties": false,
+      "description": "Validated provider completion metadata that never replaces the document.",
+      "properties": {
+        "outcome": {
+          "enum": [
+            "committed",
+            "no_op"
+          ],
+          "title": "Outcome",
+          "type": "string"
+        },
+        "summary": {
+          "maxLength": 240,
+          "minLength": 1,
+          "title": "Summary",
+          "type": "string"
+        },
+        "documentVersion": {
+          "minimum": 0,
+          "title": "Documentversion",
+          "type": "integer"
+        },
+        "noOpReason": {
+          "anyOf": [
+            {
+              "maxLength": 240,
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Noopreason"
+        },
+        "eventId": {
+          "format": "uuid",
+          "title": "Eventid",
+          "type": "string"
+        },
+        "idempotencyKey": {
+          "format": "uuid",
+          "title": "Idempotencykey",
+          "type": "string"
+        },
+        "sessionId": {
+          "format": "uuid",
+          "title": "Sessionid",
+          "type": "string"
+        },
+        "turnId": {
+          "format": "uuid",
+          "title": "Turnid",
+          "type": "string"
+        },
+        "timestamp": {
+          "format": "date-time",
+          "title": "Timestamp",
+          "type": "string"
+        },
+        "type": {
+          "const": "turn.analysis.completed",
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "outcome",
+        "summary",
+        "documentVersion",
+        "eventId",
+        "idempotencyKey",
+        "sessionId",
+        "turnId",
+        "timestamp",
+        "type"
+      ],
+      "title": "TurnAnalysisCompletedEvent",
+      "type": "object"
+    },
+    "TurnAnalysisStartedEvent": {
+      "additionalProperties": false,
+      "properties": {
+        "eventId": {
+          "format": "uuid",
+          "title": "Eventid",
+          "type": "string"
+        },
+        "idempotencyKey": {
+          "format": "uuid",
+          "title": "Idempotencykey",
+          "type": "string"
+        },
+        "sessionId": {
+          "format": "uuid",
+          "title": "Sessionid",
+          "type": "string"
+        },
+        "turnId": {
+          "format": "uuid",
+          "title": "Turnid",
+          "type": "string"
+        },
+        "timestamp": {
+          "format": "date-time",
+          "title": "Timestamp",
+          "type": "string"
+        },
+        "type": {
+          "const": "turn.analysis.started",
+          "title": "Type",
+          "type": "string"
+        },
+        "baseDocumentVersion": {
+          "minimum": 0,
+          "title": "Basedocumentversion",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "eventId",
+        "idempotencyKey",
+        "sessionId",
+        "turnId",
+        "timestamp",
+        "type",
+        "baseDocumentVersion"
+      ],
+      "title": "TurnAnalysisStartedEvent",
+      "type": "object"
+    },
+    "TurnCompletedEvent": {
+      "additionalProperties": false,
+      "properties": {
+        "eventId": {
+          "format": "uuid",
+          "title": "Eventid",
+          "type": "string"
+        },
+        "idempotencyKey": {
+          "format": "uuid",
+          "title": "Idempotencykey",
+          "type": "string"
+        },
+        "sessionId": {
+          "format": "uuid",
+          "title": "Sessionid",
+          "type": "string"
+        },
+        "turnId": {
+          "format": "uuid",
+          "title": "Turnid",
+          "type": "string"
+        },
+        "timestamp": {
+          "format": "date-time",
+          "title": "Timestamp",
+          "type": "string"
+        },
+        "type": {
+          "const": "turn.completed",
+          "title": "Type",
+          "type": "string"
+        },
+        "audioStatus": {
+          "$ref": "#/$defs/VoiceStatus"
+        },
+        "documentStatus": {
+          "$ref": "#/$defs/DocumentResultStatus"
+        },
+        "timings": {
+          "$ref": "#/$defs/TurnTimings"
+        }
+      },
+      "required": [
+        "eventId",
+        "idempotencyKey",
+        "sessionId",
+        "turnId",
+        "timestamp",
+        "type",
+        "audioStatus",
+        "documentStatus",
+        "timings"
+      ],
+      "title": "TurnCompletedEvent",
+      "type": "object"
+    },
+    "TurnQueuedEvent": {
+      "additionalProperties": false,
+      "properties": {
+        "eventId": {
+          "format": "uuid",
+          "title": "Eventid",
+          "type": "string"
+        },
+        "idempotencyKey": {
+          "format": "uuid",
+          "title": "Idempotencykey",
+          "type": "string"
+        },
+        "sessionId": {
+          "format": "uuid",
+          "title": "Sessionid",
+          "type": "string"
+        },
+        "turnId": {
+          "format": "uuid",
+          "title": "Turnid",
+          "type": "string"
+        },
+        "timestamp": {
+          "format": "date-time",
+          "title": "Timestamp",
+          "type": "string"
+        },
+        "type": {
+          "const": "turn.queued",
+          "title": "Type",
+          "type": "string"
+        },
+        "position": {
+          "maximum": 3,
+          "minimum": 1,
+          "title": "Position",
+          "type": "integer"
+        },
+        "dependsOnTurnId": {
+          "anyOf": [
+            {
+              "format": "uuid",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Dependsonturnid"
+        }
+      },
+      "required": [
+        "eventId",
+        "idempotencyKey",
+        "sessionId",
+        "turnId",
+        "timestamp",
+        "type",
+        "position"
+      ],
+      "title": "TurnQueuedEvent",
+      "type": "object"
+    },
+    "TurnRejectedEvent": {
+      "additionalProperties": false,
+      "properties": {
+        "eventId": {
+          "format": "uuid",
+          "title": "Eventid",
+          "type": "string"
+        },
+        "idempotencyKey": {
+          "format": "uuid",
+          "title": "Idempotencykey",
+          "type": "string"
+        },
+        "sessionId": {
+          "format": "uuid",
+          "title": "Sessionid",
+          "type": "string"
+        },
+        "turnId": {
+          "format": "uuid",
+          "title": "Turnid",
+          "type": "string"
+        },
+        "timestamp": {
+          "format": "date-time",
+          "title": "Timestamp",
+          "type": "string"
+        },
+        "type": {
+          "const": "turn.rejected",
+          "title": "Type",
+          "type": "string"
+        },
+        "reason": {
+          "maxLength": 240,
+          "minLength": 1,
+          "title": "Reason",
+          "type": "string"
+        },
+        "queueDepth": {
+          "maximum": 4,
+          "minimum": 0,
+          "title": "Queuedepth",
+          "type": "integer"
+        },
+        "error": {
+          "$ref": "#/$defs/SanitizedError"
+        }
+      },
+      "required": [
+        "eventId",
+        "idempotencyKey",
+        "sessionId",
+        "turnId",
+        "timestamp",
+        "type",
+        "reason",
+        "queueDepth",
+        "error"
+      ],
+      "title": "TurnRejectedEvent",
+      "type": "object"
+    },
+    "TurnStartedEvent": {
+      "additionalProperties": false,
+      "properties": {
+        "eventId": {
+          "format": "uuid",
+          "title": "Eventid",
+          "type": "string"
+        },
+        "idempotencyKey": {
+          "format": "uuid",
+          "title": "Idempotencykey",
+          "type": "string"
+        },
+        "sessionId": {
+          "format": "uuid",
+          "title": "Sessionid",
+          "type": "string"
+        },
+        "turnId": {
+          "format": "uuid",
+          "title": "Turnid",
+          "type": "string"
+        },
+        "timestamp": {
+          "format": "date-time",
+          "title": "Timestamp",
+          "type": "string"
+        },
+        "type": {
+          "const": "turn.started",
+          "title": "Type",
+          "type": "string"
+        },
+        "sequence": {
+          "minimum": 1,
+          "title": "Sequence",
+          "type": "integer"
+        },
+        "inputMode": {
+          "enum": [
+            "typed",
+            "voice"
+          ],
+          "title": "Inputmode",
+          "type": "string"
+        }
+      },
+      "required": [
+        "eventId",
+        "idempotencyKey",
+        "sessionId",
+        "turnId",
+        "timestamp",
+        "type",
+        "sequence",
+        "inputMode"
+      ],
+      "title": "TurnStartedEvent",
+      "type": "object"
+    },
+    "TurnTimings": {
+      "additionalProperties": false,
+      "description": "Content-free elapsed durations in milliseconds.",
+      "properties": {
+        "acknowledgmentMs": {
+          "anyOf": [
+            {
+              "maximum": 86400000,
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Acknowledgmentms"
+        },
+        "documentMs": {
+          "anyOf": [
+            {
+              "maximum": 86400000,
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Documentms"
+        },
+        "totalMs": {
+          "maximum": 86400000,
+          "minimum": 0,
+          "title": "Totalms",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "totalMs"
+      ],
+      "title": "TurnTimings",
+      "type": "object"
+    },
+    "UpdateListItemOperation": {
+      "additionalProperties": false,
+      "description": "Replace a known list item while preserving its stable ID.",
+      "properties": {
+        "operationId": {
+          "format": "uuid",
+          "title": "Operationid",
+          "type": "string"
+        },
+        "op": {
+          "const": "update_list_item",
+          "title": "Op",
+          "type": "string"
+        },
+        "section": {
+          "enum": [
+            "supportingSignals",
+            "stakeholders",
+            "assumptionsAndUncertainties",
+            "missingEvidence",
+            "recommendedNextActions"
+          ],
+          "title": "Section",
+          "type": "string"
+        },
+        "itemId": {
+          "format": "uuid",
+          "title": "Itemid",
+          "type": "string"
+        },
+        "value": {
+          "$ref": "#/$defs/ClassifiedText"
+        }
+      },
+      "required": [
+        "operationId",
+        "op",
+        "section",
+        "itemId",
+        "value"
+      ],
+      "title": "UpdateListItemOperation",
+      "type": "object"
+    },
+    "VoiceAcknowledgmentEvent": {
+      "additionalProperties": false,
+      "properties": {
+        "eventId": {
+          "format": "uuid",
+          "title": "Eventid",
+          "type": "string"
+        },
+        "idempotencyKey": {
+          "format": "uuid",
+          "title": "Idempotencykey",
+          "type": "string"
+        },
+        "sessionId": {
+          "format": "uuid",
+          "title": "Sessionid",
+          "type": "string"
+        },
+        "turnId": {
+          "format": "uuid",
+          "title": "Turnid",
+          "type": "string"
+        },
+        "timestamp": {
+          "format": "date-time",
+          "title": "Timestamp",
+          "type": "string"
+        },
+        "type": {
+          "const": "voice.acknowledgment",
+          "title": "Type",
+          "type": "string"
+        },
+        "intentSummary": {
+          "maxLength": 180,
+          "minLength": 1,
+          "title": "Intentsummary",
+          "type": "string"
+        },
+        "nextStep": {
+          "maxLength": 180,
+          "minLength": 1,
+          "title": "Nextstep",
+          "type": "string"
+        }
+      },
+      "required": [
+        "eventId",
+        "idempotencyKey",
+        "sessionId",
+        "turnId",
+        "timestamp",
+        "type",
+        "intentSummary",
+        "nextStep"
+      ],
+      "title": "VoiceAcknowledgmentEvent",
+      "type": "object"
+    },
+    "VoiceCompletedEvent": {
+      "additionalProperties": false,
+      "properties": {
+        "eventId": {
+          "format": "uuid",
+          "title": "Eventid",
+          "type": "string"
+        },
+        "idempotencyKey": {
+          "format": "uuid",
+          "title": "Idempotencykey",
+          "type": "string"
+        },
+        "sessionId": {
+          "format": "uuid",
+          "title": "Sessionid",
+          "type": "string"
+        },
+        "turnId": {
+          "format": "uuid",
+          "title": "Turnid",
+          "type": "string"
+        },
+        "timestamp": {
+          "format": "date-time",
+          "title": "Timestamp",
+          "type": "string"
+        },
+        "type": {
+          "const": "voice.completed",
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "eventId",
+        "idempotencyKey",
+        "sessionId",
+        "turnId",
+        "timestamp",
+        "type"
+      ],
+      "title": "VoiceCompletedEvent",
+      "type": "object"
+    },
+    "VoiceInterruptedEvent": {
+      "additionalProperties": false,
+      "properties": {
+        "eventId": {
+          "format": "uuid",
+          "title": "Eventid",
+          "type": "string"
+        },
+        "idempotencyKey": {
+          "format": "uuid",
+          "title": "Idempotencykey",
+          "type": "string"
+        },
+        "sessionId": {
+          "format": "uuid",
+          "title": "Sessionid",
+          "type": "string"
+        },
+        "turnId": {
+          "format": "uuid",
+          "title": "Turnid",
+          "type": "string"
+        },
+        "timestamp": {
+          "format": "date-time",
+          "title": "Timestamp",
+          "type": "string"
+        },
+        "type": {
+          "const": "voice.interrupted",
+          "title": "Type",
+          "type": "string"
+        },
+        "reason": {
+          "enum": [
+            "barge_in",
+            "user_stop",
+            "playback_error"
+          ],
+          "title": "Reason",
+          "type": "string"
+        }
+      },
+      "required": [
+        "eventId",
+        "idempotencyKey",
+        "sessionId",
+        "turnId",
+        "timestamp",
+        "type",
+        "reason"
+      ],
+      "title": "VoiceInterruptedEvent",
+      "type": "object"
+    },
+    "VoiceStartedEvent": {
+      "additionalProperties": false,
+      "properties": {
+        "eventId": {
+          "format": "uuid",
+          "title": "Eventid",
+          "type": "string"
+        },
+        "idempotencyKey": {
+          "format": "uuid",
+          "title": "Idempotencykey",
+          "type": "string"
+        },
+        "sessionId": {
+          "format": "uuid",
+          "title": "Sessionid",
+          "type": "string"
+        },
+        "turnId": {
+          "format": "uuid",
+          "title": "Turnid",
+          "type": "string"
+        },
+        "timestamp": {
+          "format": "date-time",
+          "title": "Timestamp",
+          "type": "string"
+        },
+        "type": {
+          "const": "voice.started",
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "eventId",
+        "idempotencyKey",
+        "sessionId",
+        "turnId",
+        "timestamp",
+        "type"
+      ],
+      "title": "VoiceStartedEvent",
+      "type": "object"
+    },
+    "VoiceStatus": {
+      "description": "Independent voice-lane terminal state.",
+      "enum": [
+        "not_started",
+        "speaking",
+        "completed",
+        "interrupted",
+        "failed"
+      ],
+      "title": "VoiceStatus",
+      "type": "string"
+    }
+  },
+  "discriminator": {
+    "mapping": {
+      "document.committed": "#/$defs/DocumentCommittedEvent",
+      "document.created": "#/$defs/DocumentCreatedEvent",
+      "document.failed": "#/$defs/DocumentFailedEvent",
+      "document.patch": "#/$defs/DocumentPatchEvent",
+      "document.pending": "#/$defs/DocumentPendingEvent",
+      "turn.analysis.cancelled": "#/$defs/TurnAnalysisCancelledEvent",
+      "turn.analysis.cancelling": "#/$defs/TurnAnalysisCancellingEvent",
+      "turn.analysis.completed": "#/$defs/TurnAnalysisCompletedEvent",
+      "turn.analysis.started": "#/$defs/TurnAnalysisStartedEvent",
+      "turn.completed": "#/$defs/TurnCompletedEvent",
+      "turn.queued": "#/$defs/TurnQueuedEvent",
+      "turn.rejected": "#/$defs/TurnRejectedEvent",
+      "turn.started": "#/$defs/TurnStartedEvent",
+      "voice.acknowledgment": "#/$defs/VoiceAcknowledgmentEvent",
+      "voice.completed": "#/$defs/VoiceCompletedEvent",
+      "voice.interrupted": "#/$defs/VoiceInterruptedEvent",
+      "voice.started": "#/$defs/VoiceStartedEvent"
+    },
+    "propertyName": "type"
+  },
+  "oneOf": [
+    {
+      "$ref": "#/$defs/TurnStartedEvent"
+    },
+    {
+      "$ref": "#/$defs/TurnQueuedEvent"
+    },
+    {
+      "$ref": "#/$defs/TurnRejectedEvent"
+    },
+    {
+      "$ref": "#/$defs/TurnAnalysisStartedEvent"
+    },
+    {
+      "$ref": "#/$defs/TurnAnalysisCancellingEvent"
+    },
+    {
+      "$ref": "#/$defs/TurnAnalysisCancelledEvent"
+    },
+    {
+      "$ref": "#/$defs/TurnAnalysisCompletedEvent"
+    },
+    {
+      "$ref": "#/$defs/VoiceStartedEvent"
+    },
+    {
+      "$ref": "#/$defs/VoiceAcknowledgmentEvent"
+    },
+    {
+      "$ref": "#/$defs/VoiceInterruptedEvent"
+    },
+    {
+      "$ref": "#/$defs/VoiceCompletedEvent"
+    },
+    {
+      "$ref": "#/$defs/DocumentPendingEvent"
+    },
+    {
+      "$ref": "#/$defs/DocumentCreatedEvent"
+    },
+    {
+      "$ref": "#/$defs/DocumentPatchEvent"
+    },
+    {
+      "$ref": "#/$defs/DocumentCommittedEvent"
+    },
+    {
+      "$ref": "#/$defs/DocumentFailedEvent"
+    },
+    {
+      "$ref": "#/$defs/TurnCompletedEvent"
+    }
+  ],
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/dual-channel-voice-agent-pattern/contracts/app-events.schema.json",
+  "title": "Dual-channel application events",
+  "x-maxWireBytes": 65536
+}

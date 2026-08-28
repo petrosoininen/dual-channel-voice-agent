@@ -1,0 +1,87 @@
+{
+  "version": "1.0.0",
+  "resources": {
+    "resourceGroup": {
+      "bicep": "Microsoft.Resources/resourceGroups@2024-11-01",
+      "terraform": "azurerm_resource_group"
+    },
+    "aiServicesAccount": {
+      "bicep": "Microsoft.CognitiveServices/accounts@2026-05-01",
+      "terraform": "azurerm_cognitive_account"
+    },
+    "foundryProject": {
+      "bicep": "Microsoft.CognitiveServices/accounts/projects@2026-05-01",
+      "terraform": "Microsoft.CognitiveServices/accounts/projects@2026-05-01"
+    },
+    "agentModelDeployment": {
+      "bicep": "Microsoft.CognitiveServices/accounts/deployments@2026-05-01",
+      "terraform": "azurerm_cognitive_deployment"
+    }
+  },
+  "securityChoices": {
+    "keylessOnly": {
+      "bicep": "disableLocalAuth: true",
+      "terraform": "local_auth_enabled                 = false"
+    },
+    "projectManagement": {
+      "bicep": "allowProjectManagement: true",
+      "terraform": "project_management_enabled         = true"
+    },
+    "systemIdentity": {
+      "bicep": "type: 'SystemAssigned'",
+      "terraform": "type = \"SystemAssigned\""
+    }
+  },
+  "roleAssignments": [
+    "operatorVoice",
+    "runtimeVoice",
+    "operatorProjectManager",
+    "runtimeProjectUser"
+  ],
+  "parameters": {
+    "location": ["location", "location"],
+    "environmentLabel": ["environmentLabel", "environment_label"],
+    "uniqueSuffix": ["uniqueSuffix", "unique_suffix"],
+    "agentModelName": ["agentModelName", "agent_model_name"],
+    "agentModelVersion": ["agentModelVersion", "agent_model_version"],
+    "agentModelFormat": ["agentModelFormat", "agent_model_format"],
+    "agentModelSku": ["agentModelSku", "agent_model_sku"],
+    "agentModelCapacity": ["agentModelCapacity", "agent_model_capacity"],
+    "voiceLiveModel": ["voiceLiveModel", "voice_live_model"],
+    "operatorPrincipalId": ["operatorPrincipalId", "operator_principal_id"],
+    "operatorPrincipalType": ["operatorPrincipalType", "operator_principal_type"],
+    "runtimePrincipalId": ["runtimePrincipalId", "runtime_principal_id"],
+    "runtimePrincipalType": ["runtimePrincipalType", "runtime_principal_type"],
+    "voiceUserRoleDefinitionId": ["voiceUserRoleDefinitionId", "voice_user_role_definition_id"],
+    "foundryProjectManagerRoleDefinitionId": ["foundryProjectManagerRoleDefinitionId", "foundry_project_manager_role_definition_id"],
+    "foundryUserRoleDefinitionId": ["foundryUserRoleDefinitionId", "foundry_user_role_definition_id"],
+    "tags": ["tags", "tags"]
+  },
+  "defaults": {
+    "agentModelVersion": [
+      "param agentModelVersion string = ''",
+      "default     = \"\""
+    ],
+    "agentModelFormat": [
+      "param agentModelFormat string = 'OpenAI'",
+      "default     = \"OpenAI\""
+    ],
+    "agentModelSku": [
+      "param agentModelSku string = 'GlobalStandard'",
+      "default     = \"GlobalStandard\""
+    ],
+    "agentModelCapacity": [
+      "param agentModelCapacity int = 30",
+      "default     = 30"
+    ]
+  },
+  "outputs": {
+    "resourceGroupName": ["resourceGroupName", "resource_group_name"],
+    "accountName": ["accountName", "account_name"],
+    "projectName": ["projectName", "project_name"],
+    "agentModelDeploymentName": ["agentModelDeploymentName", "agent_model_deployment_name"],
+    "voiceEndpoint": ["voiceEndpoint", "voice_endpoint"],
+    "voiceLiveModel": ["voiceLiveModel", "voice_live_model"],
+    "foundryProjectEndpoint": ["foundryProjectEndpoint", "foundry_project_endpoint"]
+  }
+}

@@ -1,0 +1,50 @@
+[
+  {
+    "name": "unknown command",
+    "input": {
+      "type": "turn.retry",
+      "commandId": "10000000-0000-4000-8000-000000000003",
+      "idempotencyKey": "10000000-0000-4000-8000-000000000013",
+      "sessionId": "10000000-0000-4000-8000-000000000021",
+      "timestamp": "2026-08-26T09:03:00Z"
+    }
+  },
+  {
+    "name": "mistyped turn identifier",
+    "input": {
+      "type": "turn.cancel",
+      "commandId": "10000000-0000-4000-8000-000000000004",
+      "idempotencyKey": "10000000-0000-4000-8000-000000000014",
+      "sessionId": "10000000-0000-4000-8000-000000000021",
+      "turnId": 4,
+      "timestamp": "2026-08-26T09:04:00Z",
+      "reason": "Cancel the queued analysis."
+    }
+  },
+  {
+    "name": "unexpected mode override",
+    "input": {
+      "type": "turn.submit",
+      "commandId": "10000000-0000-4000-8000-000000000005",
+      "idempotencyKey": "10000000-0000-4000-8000-000000000015",
+      "sessionId": "10000000-0000-4000-8000-000000000021",
+      "turnId": "20000000-0000-4000-8000-000000000005",
+      "timestamp": "2026-08-26T09:05:00Z",
+      "inputMode": "voice",
+      "transcript": "Review the synthetic project.",
+      "mode": "foundry"
+    }
+  },
+  {
+    "name": "voice acknowledgment missing next step",
+    "input": {
+      "type": "voice.acknowledge",
+      "commandId": "10000000-0000-4000-8000-000000000009",
+      "idempotencyKey": "10000000-0000-4000-8000-000000000019",
+      "sessionId": "10000000-0000-4000-8000-000000000021",
+      "turnId": "20000000-0000-4000-8000-000000000001",
+      "timestamp": "2026-08-26T09:00:02Z",
+      "intentSummary": "I understand the requested review."
+    }
+  }
+]

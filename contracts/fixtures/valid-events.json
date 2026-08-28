@@ -1,0 +1,82 @@
+[
+  {
+    "name": "turn started",
+    "input": {
+      "type": "turn.started",
+      "eventId": "40000000-0000-4000-8000-000000000001",
+      "idempotencyKey": "40000000-0000-4000-8000-000000000101",
+      "sessionId": "10000000-0000-4000-8000-000000000021",
+      "turnId": "20000000-0000-4000-8000-000000000001",
+      "timestamp": "2026-08-26T09:00:00Z",
+      "sequence": 1,
+      "inputMode": "voice"
+    }
+  },
+  {
+    "name": "voice acknowledgment",
+    "input": {
+      "type": "voice.acknowledgment",
+      "eventId": "40000000-0000-4000-8000-000000000002",
+      "idempotencyKey": "40000000-0000-4000-8000-000000000102",
+      "sessionId": "10000000-0000-4000-8000-000000000021",
+      "turnId": "20000000-0000-4000-8000-000000000001",
+      "timestamp": "2026-08-26T09:00:01Z",
+      "intentSummary": "I will review the synthetic project context.",
+      "nextStep": "I will organize the evidence and unknowns in the working document."
+    }
+  },
+  {
+    "name": "document pending",
+    "input": {
+      "type": "document.pending",
+      "eventId": "40000000-0000-4000-8000-000000000003",
+      "idempotencyKey": "40000000-0000-4000-8000-000000000103",
+      "sessionId": "10000000-0000-4000-8000-000000000021",
+      "turnId": "20000000-0000-4000-8000-000000000001",
+      "timestamp": "2026-08-26T09:00:02Z",
+      "documentId": "30000000-0000-4000-8000-000000000001",
+      "title": "Synthetic opportunity assessment"
+    }
+  },
+  {
+    "name": "voice playback completed",
+    "input": {
+      "type": "voice.completed",
+      "eventId": "40000000-0000-4000-8000-000000000004",
+      "idempotencyKey": "40000000-0000-4000-8000-000000000104",
+      "sessionId": "10000000-0000-4000-8000-000000000021",
+      "turnId": "20000000-0000-4000-8000-000000000001",
+      "timestamp": "2026-08-26T09:00:03Z"
+    }
+  },
+  {
+    "name": "analysis completion summary",
+    "input": {
+      "type": "turn.analysis.completed",
+      "eventId": "40000000-0000-4000-8000-000000000005",
+      "idempotencyKey": "40000000-0000-4000-8000-000000000105",
+      "sessionId": "10000000-0000-4000-8000-000000000021",
+      "turnId": "20000000-0000-4000-8000-000000000001",
+      "timestamp": "2026-08-26T09:00:04Z",
+      "outcome": "committed",
+      "summary": "Updated the working document to version 1.",
+      "documentVersion": 1,
+      "noOpReason": null
+    }
+  },
+  {
+    "name": "reasoned no-op completion",
+    "input": {
+      "type": "turn.analysis.completed",
+      "eventId": "40000000-0000-4000-8000-000000000006",
+      "idempotencyKey": "40000000-0000-4000-8000-000000000106",
+      "sessionId": "10000000-0000-4000-8000-000000000021",
+      "turnId": "20000000-0000-4000-8000-000000000001",
+      "timestamp": "2026-08-26T09:00:05Z",
+      "outcome": "no_op",
+      "summary": "No document changes were needed.",
+      "documentVersion": 1,
+      "noOpReason": "The canonical document already contains the supported detail."
+    }
+  }
+]

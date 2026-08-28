@@ -1,0 +1,47 @@
+[
+  {
+    "sequence": 1,
+    "turnId": "20000000-0000-4000-8000-000000000001",
+    "transcript": "Review this fictional project and identify the strongest expansion opportunity.",
+    "intent": "Identify one evidence-bounded opportunity from the synthetic context.",
+    "expectedFocus": [
+      {
+        "text": "A guided exception-triage workflow is the strongest initial hypothesis.",
+        "classification": "inference"
+      }
+    ]
+  },
+  {
+    "sequence": 2,
+    "turnId": "20000000-0000-4000-8000-000000000002",
+    "transcript": "Focus on the operational pain behind that opportunity and strengthen the supporting signals.",
+    "intent": "Refine the same hypothesis using only classified synthetic signals.",
+    "expectedFocus": [
+      {
+        "text": "Recurring review of unresolved exceptions indicates coordination effort.",
+        "classification": "synthetic_evidence",
+        "sourceLabel": "Synthetic meeting note"
+      },
+      {
+        "text": "The scale and business impact of that effort remain unverified.",
+        "classification": "unknown"
+      }
+    ]
+  },
+  {
+    "sequence": 3,
+    "turnId": "20000000-0000-4000-8000-000000000003",
+    "transcript": "Refine the value proposition, list the missing evidence, and give me the next customer action.",
+    "intent": "Separate inferred value from unknown evidence and propose validation.",
+    "expectedFocus": [
+      {
+        "text": "A structured discovery review could test whether guided triage improves ownership consistency.",
+        "classification": "inference"
+      },
+      {
+        "text": "Baseline exception volume, age, handling effort, and success measures are missing.",
+        "classification": "unknown"
+      }
+    ]
+  }
+]

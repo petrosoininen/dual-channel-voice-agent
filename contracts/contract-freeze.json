@@ -1,0 +1,64 @@
+{
+  "contractVersion": "1.0.0",
+  "freezeStatus": "frozen",
+  "frozenDate": "2026-08-28",
+  "revisionRationale": "Version 1.0.0 defines the public shared contract for document authority, ordered work, event recovery, and transcript-gated generative voice acknowledgment.",
+  "guarantees": [
+    "Only validated semantic patches may update the canonical document.",
+    "Per-conversation deep work runs in FIFO order with bounded capacity.",
+    "Cancellation suppresses queued work and late provider results.",
+    "Recorded validated events support reconnect and replay.",
+    "Local WebSockets require trusted origin, host, and session authorization.",
+    "Generated voice audio remains inaudible until its completed transcript passes acknowledgment validation."
+  ],
+  "scope": [
+    "app commands",
+    "app events",
+    "semantic document patches",
+    "opportunity document model",
+    "per-conversation queue semantics",
+    "shared synthetic acceptance fixtures",
+    "voice acknowledgment authority"
+  ],
+  "documentSemantics": {
+    "canonicalDocumentsPerConversation": 1,
+    "initialVersion": 0,
+    "commitVersionIncrement": 1,
+    "patchApplication": "atomic",
+    "baseVersionPolicy": "must-equal-canonical",
+    "duplicateDelivery": "idempotent-or-collision-error",
+    "revert": "new-restoring-version",
+    "reasonedNoOp": "success-without-version-increment",
+    "persistence": "process-memory-only"
+  },
+  "queueSemantics": {
+    "executionOrder": "fifo-per-conversation",
+    "runningCapacity": 1,
+    "pendingCapacity": 3,
+    "queuedCancellation": "immediate-no-commit",
+    "runningCancellation": "best-effort-late-result-suppressed",
+    "voiceInterruptionCancelsDeepWork": false
+  },
+  "transportSemantics": {
+    "eventRecovery": "recorded-validated-replay",
+    "subscriberOverflow": "close-reconnect-replay",
+    "websocketAuthorization": "trusted-origin-host-and-session-token",
+    "voiceLifecycle": "browser-observed-and-turn-correlated",
+    "voiceAcknowledgment": "model-generated-buffered-claim-validated"
+  },
+  "revisionPolicy": "Any shared-contract change requires a new contract version, a written rationale, regenerated fixtures/schemas, and reruns of every implemented mode and frontend suite affected.",
+  "files": {
+    "contracts/app-commands.schema.json": "9bc86241ccbe07ede84e18a4a033c89b01c404f44f2c233a1fd9dea367d0e74e",
+    "contracts/app-events.schema.json": "cac7c74a0b9f2faf4f65ee5a6bed7aa6c28016ad22bcc6d6190804ac63a27c01",
+    "contracts/document-patch.schema.json": "93a0a0debcddf409d8f34e3a0717a037951e950cdd9ea3c967121c1b20ad010b",
+    "contracts/fixtures/valid-commands.json": "ac2f2a342a9146aefa319a3423de4e99b6b2557acc7fdc97030d26bcecfc1325",
+    "contracts/fixtures/invalid-commands.json": "b9611514a208ef937f6bf34adc2c338cefafd022fbad10e0607e76615360f9af",
+    "contracts/fixtures/valid-events.json": "4d9565378f1f6d0ad22df6c0c629fc54835a8f7b942ff1c0f5486481f793e290",
+    "contracts/fixtures/invalid-events.json": "cc7f1af9cf8e3645ef56728e25cc7f525ff90b5bc1c760a2ff01f3529dde5c9f",
+    "contracts/fixtures/valid-patches.json": "53228aa46de0ea067bbb9b2f2d8e91256da50b4b68451ece8daf7daa034bd6d3",
+    "contracts/fixtures/invalid-patches.json": "6d0c34e32c2082a4fe45a9cdd3731c5e346742d13c47a151257559a5c6074365",
+    "fixtures/synthetic-project.json": "35caa6b4199194abb06c29ed354d755d2427c02b48656317f5f3ee8a25dd407a",
+    "fixtures/scripted-turns.json": "35f2195a1007d196b0392b0cfa19aed273f6c796ea727fc8d12c467a20aff18f",
+    "prompts/voice-acknowledgment.md": "15982e0d9115a8b4a8e7b90fe58f02ce6d8d1da8f8fa5bbb0870c14b36a2e03f"
+  }
+}

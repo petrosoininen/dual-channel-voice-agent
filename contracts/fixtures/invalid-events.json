@@ -1,0 +1,58 @@
+[
+  {
+    "name": "unknown event",
+    "input": {
+      "type": "voice.secret",
+      "eventId": "40000000-0000-4000-8000-000000000011",
+      "idempotencyKey": "40000000-0000-4000-8000-000000000111",
+      "sessionId": "10000000-0000-4000-8000-000000000021",
+      "turnId": "20000000-0000-4000-8000-000000000001",
+      "timestamp": "2026-08-26T09:00:03Z"
+    }
+  },
+  {
+    "name": "queue position exceeds bound",
+    "input": {
+      "type": "turn.queued",
+      "eventId": "40000000-0000-4000-8000-000000000012",
+      "idempotencyKey": "40000000-0000-4000-8000-000000000112",
+      "sessionId": "10000000-0000-4000-8000-000000000021",
+      "turnId": "20000000-0000-4000-8000-000000000002",
+      "timestamp": "2026-08-26T09:00:04Z",
+      "position": 4
+    }
+  },
+  {
+    "name": "unsanitized error shape",
+    "input": {
+      "type": "document.failed",
+      "eventId": "40000000-0000-4000-8000-000000000013",
+      "idempotencyKey": "40000000-0000-4000-8000-000000000113",
+      "sessionId": "10000000-0000-4000-8000-000000000021",
+      "turnId": "20000000-0000-4000-8000-000000000001",
+      "timestamp": "2026-08-26T09:00:05Z",
+      "documentId": "30000000-0000-4000-8000-000000000001",
+      "error": {
+        "code": "internal_error",
+        "category": "document",
+        "message": "The document operation failed.",
+        "retryable": false,
+        "details": "not allowed"
+      }
+    }
+  },
+  {
+    "name": "no-op completion missing reason",
+    "input": {
+      "type": "turn.analysis.completed",
+      "eventId": "40000000-0000-4000-8000-000000000014",
+      "idempotencyKey": "40000000-0000-4000-8000-000000000114",
+      "sessionId": "10000000-0000-4000-8000-000000000021",
+      "turnId": "20000000-0000-4000-8000-000000000001",
+      "timestamp": "2026-08-26T09:00:06Z",
+      "outcome": "no_op",
+      "summary": "No document changes were needed.",
+      "documentVersion": 1
+    }
+  }
+]

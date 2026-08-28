@@ -1,0 +1,53 @@
+[
+  {
+    "name": "atomic classified update",
+    "input": {
+      "patchId": "50000000-0000-4000-8000-000000000001",
+      "sessionId": "10000000-0000-4000-8000-000000000021",
+      "turnId": "20000000-0000-4000-8000-000000000001",
+      "documentId": "30000000-0000-4000-8000-000000000001",
+      "baseVersion": 0,
+      "summary": "Create the initial evidence-bounded opportunity.",
+      "operations": [
+        {
+          "operationId": "60000000-0000-4000-8000-000000000001",
+          "op": "set_field",
+          "field": "status",
+          "value": "refining"
+        },
+        {
+          "operationId": "60000000-0000-4000-8000-000000000002",
+          "op": "replace_section",
+          "section": "opportunityHypothesis",
+          "value": {
+            "text": "Guided exception triage may improve workflow consistency.",
+            "classification": "inference"
+          }
+        },
+        {
+          "operationId": "60000000-0000-4000-8000-000000000003",
+          "op": "append_list_item",
+          "section": "supportingSignals",
+          "value": {
+            "text": "The fictional team reviews unresolved exceptions in a recurring meeting.",
+            "classification": "synthetic_evidence",
+            "sourceLabel": "Synthetic meeting note"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "name": "reasoned no-op",
+    "input": {
+      "patchId": "50000000-0000-4000-8000-000000000002",
+      "sessionId": "10000000-0000-4000-8000-000000000021",
+      "turnId": "20000000-0000-4000-8000-000000000002",
+      "documentId": "30000000-0000-4000-8000-000000000001",
+      "baseVersion": 1,
+      "summary": "Retain the current evidence-bounded assessment.",
+      "operations": [],
+      "reason": "The synthetic context adds no newly supported claim."
+    }
+  }
+]

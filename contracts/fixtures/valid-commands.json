@@ -1,0 +1,64 @@
+[
+  {
+    "name": "typed turn submission",
+    "input": {
+      "type": "turn.submit",
+      "commandId": "10000000-0000-4000-8000-000000000001",
+      "idempotencyKey": "10000000-0000-4000-8000-000000000011",
+      "sessionId": "10000000-0000-4000-8000-000000000021",
+      "turnId": "20000000-0000-4000-8000-000000000001",
+      "timestamp": "2026-08-26T09:00:00Z",
+      "inputMode": "typed",
+      "transcript": "Review the synthetic project context."
+    }
+  },
+  {
+    "name": "document revert",
+    "input": {
+      "type": "document.revert",
+      "commandId": "10000000-0000-4000-8000-000000000002",
+      "idempotencyKey": "10000000-0000-4000-8000-000000000012",
+      "sessionId": "10000000-0000-4000-8000-000000000021",
+      "turnId": "20000000-0000-4000-8000-000000000003",
+      "timestamp": "2026-08-26T09:02:00Z",
+      "documentId": "30000000-0000-4000-8000-000000000001",
+      "targetVersion": 1,
+      "summary": "Restore the first synthetic assessment."
+    }
+  },
+  {
+    "name": "voice playback started",
+    "input": {
+      "type": "voice.start",
+      "commandId": "10000000-0000-4000-8000-000000000006",
+      "idempotencyKey": "10000000-0000-4000-8000-000000000016",
+      "sessionId": "10000000-0000-4000-8000-000000000021",
+      "turnId": "20000000-0000-4000-8000-000000000001",
+      "timestamp": "2026-08-26T09:00:01Z"
+    }
+  },
+  {
+    "name": "voice acknowledgment observed",
+    "input": {
+      "type": "voice.acknowledge",
+      "commandId": "10000000-0000-4000-8000-000000000007",
+      "idempotencyKey": "10000000-0000-4000-8000-000000000017",
+      "sessionId": "10000000-0000-4000-8000-000000000021",
+      "turnId": "20000000-0000-4000-8000-000000000001",
+      "timestamp": "2026-08-26T09:00:02Z",
+      "intentSummary": "I understand the requested review.",
+      "nextStep": "Next, I will assess the synthetic context."
+    }
+  },
+  {
+    "name": "voice playback completed",
+    "input": {
+      "type": "voice.complete",
+      "commandId": "10000000-0000-4000-8000-000000000008",
+      "idempotencyKey": "10000000-0000-4000-8000-000000000018",
+      "sessionId": "10000000-0000-4000-8000-000000000021",
+      "turnId": "20000000-0000-4000-8000-000000000001",
+      "timestamp": "2026-08-26T09:00:03Z"
+    }
+  }
+]

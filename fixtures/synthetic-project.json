@@ -1,0 +1,69 @@
+{
+  "projectId": "b24b21b2-f32a-4fa7-8d8c-6de98a17c001",
+  "displayName": "Aster Field Cooperative modernization",
+  "industry": "Synthetic specialty distribution",
+  "goals": [
+    {
+      "text": "Reduce manual exception handling in regional order workflows.",
+      "classification": "synthetic_evidence",
+      "sourceLabel": "Synthetic project brief"
+    },
+    {
+      "text": "Improve the consistency of weekly operational reviews.",
+      "classification": "synthetic_evidence",
+      "sourceLabel": "Synthetic project brief"
+    }
+  ],
+  "currentCapabilities": [
+    {
+      "text": "A fictional workflow portal captures orders and review notes.",
+      "classification": "synthetic_evidence",
+      "sourceLabel": "Synthetic solution inventory"
+    },
+    {
+      "text": "Exception categories are recorded, but follow-up ownership is not standardized.",
+      "classification": "synthetic_evidence",
+      "sourceLabel": "Synthetic workflow observation"
+    }
+  ],
+  "stakeholderRoles": [
+    {
+      "text": "Operations lead",
+      "classification": "synthetic_evidence",
+      "sourceLabel": "Synthetic stakeholder register"
+    },
+    {
+      "text": "Regional service manager",
+      "classification": "synthetic_evidence",
+      "sourceLabel": "Synthetic stakeholder register"
+    }
+  ],
+  "signals": [
+    {
+      "text": "The fictional team reviews unresolved exceptions in a recurring meeting.",
+      "classification": "synthetic_evidence",
+      "sourceLabel": "Synthetic meeting note"
+    },
+    {
+      "text": "A guided exception-triage capability may reduce repeated manual coordination.",
+      "classification": "inference"
+    }
+  ],
+  "unknowns": [
+    {
+      "text": "The volume and age distribution of unresolved exceptions is not known.",
+      "classification": "unknown"
+    },
+    {
+      "text": "No validated success metric or economic value is available.",
+      "classification": "unknown"
+    }
+  ],
+  "sourceNotes": [
+    "Synthetic project brief",
+    "Synthetic solution inventory",
+    "Synthetic workflow observation",
+    "Synthetic stakeholder register",
+    "Synthetic meeting note"
+  ]
+}

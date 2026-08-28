@@ -1,0 +1,24 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "location": { "value": "<supported-region>" },
+    "environmentLabel": { "value": "validation" },
+    "uniqueSuffix": { "value": "<unique-suffix>" },
+    "agentModelName": { "value": "<supported-agent-model>" },
+    "agentModelCapacity": { "value": 30 },
+    "voiceLiveModel": { "value": "<supported-voice-live-model>" },
+    "operatorPrincipalId": { "value": "<operator-object-id>" },
+    "operatorPrincipalType": { "value": "User" },
+    "runtimePrincipalId": { "value": "<runtime-object-id>" },
+    "runtimePrincipalType": { "value": "User" },
+    "voiceUserRoleDefinitionId": { "value": "<voice-user-role-definition-id>" },
+    "foundryProjectManagerRoleDefinitionId": { "value": "<project-manager-role-definition-id>" },
+    "foundryUserRoleDefinitionId": { "value": "<foundry-user-role-definition-id>" },
+    "tags": {
+      "value": {
+        "purpose": "ephemeral-reference-validation"
+      }
+    }
+  }
+}

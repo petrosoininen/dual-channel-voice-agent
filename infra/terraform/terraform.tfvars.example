@@ -1,0 +1,20 @@
+location          = "<supported-region>"
+environment_label = "validation"
+unique_suffix     = "<unique-suffix>"
+
+agent_model_name = "<supported-agent-model>"
+agent_model_capacity = 30
+voice_live_model = "<supported-voice-live-model>"
+
+operator_principal_id   = "<operator-object-id>"
+operator_principal_type = "User"
+runtime_principal_id    = "<runtime-object-id>"
+runtime_principal_type  = "User"
+
+voice_user_role_definition_id             = "<voice-user-role-definition-id>"
+foundry_project_manager_role_definition_id = "<project-manager-role-definition-id>"
+foundry_user_role_definition_id           = "<foundry-user-role-definition-id>"
+
+tags = {
+  purpose = "ephemeral-reference-validation"
+}

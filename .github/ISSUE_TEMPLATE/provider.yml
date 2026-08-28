@@ -1,0 +1,26 @@
+name: Provider adapter proposal
+description: Propose a tested voice or agent provider.
+title: "[Provider]: "
+labels: ["provider"]
+body:
+  - type: dropdown
+    id: lane
+    attributes:
+      label: Lane
+      options: [Voice, Agent]
+    validations:
+      required: true
+  - type: textarea
+    id: worksheet
+    attributes:
+      label: Adapter worksheet
+      description: Address transport, trust, credentials, lifecycle, retention, pricing, limits, mapping, tests, and unsupported features.
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Proposed evidence
+      description: Distinguish CI-verified, tenant-validated, illustrative, and bring-your-own.
+    validations:
+      required: true

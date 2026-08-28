@@ -1,0 +1,430 @@
+{
+  "$defs": {
+    "DocumentRevertCommand": {
+      "additionalProperties": false,
+      "description": "Restore an earlier immutable document snapshot as a new version.",
+      "properties": {
+        "commandId": {
+          "format": "uuid",
+          "title": "Commandid",
+          "type": "string"
+        },
+        "idempotencyKey": {
+          "format": "uuid",
+          "title": "Idempotencykey",
+          "type": "string"
+        },
+        "sessionId": {
+          "format": "uuid",
+          "title": "Sessionid",
+          "type": "string"
+        },
+        "timestamp": {
+          "format": "date-time",
+          "title": "Timestamp",
+          "type": "string"
+        },
+        "type": {
+          "const": "document.revert",
+          "title": "Type",
+          "type": "string"
+        },
+        "turnId": {
+          "format": "uuid",
+          "title": "Turnid",
+          "type": "string"
+        },
+        "documentId": {
+          "format": "uuid",
+          "title": "Documentid",
+          "type": "string"
+        },
+        "targetVersion": {
+          "minimum": 1,
+          "title": "Targetversion",
+          "type": "integer"
+        },
+        "summary": {
+          "maxLength": 500,
+          "minLength": 1,
+          "title": "Summary",
+          "type": "string"
+        }
+      },
+      "required": [
+        "commandId",
+        "idempotencyKey",
+        "sessionId",
+        "timestamp",
+        "type",
+        "turnId",
+        "documentId",
+        "targetVersion",
+        "summary"
+      ],
+      "title": "DocumentRevertCommand",
+      "type": "object"
+    },
+    "TurnCancelCommand": {
+      "additionalProperties": false,
+      "description": "Request cancellation of one accepted deep turn.",
+      "properties": {
+        "commandId": {
+          "format": "uuid",
+          "title": "Commandid",
+          "type": "string"
+        },
+        "idempotencyKey": {
+          "format": "uuid",
+          "title": "Idempotencykey",
+          "type": "string"
+        },
+        "sessionId": {
+          "format": "uuid",
+          "title": "Sessionid",
+          "type": "string"
+        },
+        "timestamp": {
+          "format": "date-time",
+          "title": "Timestamp",
+          "type": "string"
+        },
+        "type": {
+          "const": "turn.cancel",
+          "title": "Type",
+          "type": "string"
+        },
+        "turnId": {
+          "format": "uuid",
+          "title": "Turnid",
+          "type": "string"
+        },
+        "reason": {
+          "maxLength": 240,
+          "minLength": 1,
+          "title": "Reason",
+          "type": "string"
+        }
+      },
+      "required": [
+        "commandId",
+        "idempotencyKey",
+        "sessionId",
+        "timestamp",
+        "type",
+        "turnId",
+        "reason"
+      ],
+      "title": "TurnCancelCommand",
+      "type": "object"
+    },
+    "TurnSubmitCommand": {
+      "additionalProperties": false,
+      "description": "Submit a typed or final voice transcript as one logical turn.",
+      "properties": {
+        "commandId": {
+          "format": "uuid",
+          "title": "Commandid",
+          "type": "string"
+        },
+        "idempotencyKey": {
+          "format": "uuid",
+          "title": "Idempotencykey",
+          "type": "string"
+        },
+        "sessionId": {
+          "format": "uuid",
+          "title": "Sessionid",
+          "type": "string"
+        },
+        "timestamp": {
+          "format": "date-time",
+          "title": "Timestamp",
+          "type": "string"
+        },
+        "type": {
+          "const": "turn.submit",
+          "title": "Type",
+          "type": "string"
+        },
+        "turnId": {
+          "format": "uuid",
+          "title": "Turnid",
+          "type": "string"
+        },
+        "inputMode": {
+          "enum": [
+            "typed",
+            "voice"
+          ],
+          "title": "Inputmode",
+          "type": "string"
+        },
+        "transcript": {
+          "maxLength": 4000,
+          "minLength": 1,
+          "title": "Transcript",
+          "type": "string"
+        }
+      },
+      "required": [
+        "commandId",
+        "idempotencyKey",
+        "sessionId",
+        "timestamp",
+        "type",
+        "turnId",
+        "inputMode",
+        "transcript"
+      ],
+      "title": "TurnSubmitCommand",
+      "type": "object"
+    },
+    "VoiceAcknowledgmentCommand": {
+      "additionalProperties": false,
+      "description": "Record one constrained non-authoritative acknowledgment.",
+      "properties": {
+        "commandId": {
+          "format": "uuid",
+          "title": "Commandid",
+          "type": "string"
+        },
+        "idempotencyKey": {
+          "format": "uuid",
+          "title": "Idempotencykey",
+          "type": "string"
+        },
+        "sessionId": {
+          "format": "uuid",
+          "title": "Sessionid",
+          "type": "string"
+        },
+        "timestamp": {
+          "format": "date-time",
+          "title": "Timestamp",
+          "type": "string"
+        },
+        "type": {
+          "const": "voice.acknowledge",
+          "title": "Type",
+          "type": "string"
+        },
+        "turnId": {
+          "format": "uuid",
+          "title": "Turnid",
+          "type": "string"
+        },
+        "intentSummary": {
+          "maxLength": 180,
+          "minLength": 1,
+          "title": "Intentsummary",
+          "type": "string"
+        },
+        "nextStep": {
+          "maxLength": 180,
+          "minLength": 1,
+          "title": "Nextstep",
+          "type": "string"
+        }
+      },
+      "required": [
+        "commandId",
+        "idempotencyKey",
+        "sessionId",
+        "timestamp",
+        "type",
+        "turnId",
+        "intentSummary",
+        "nextStep"
+      ],
+      "title": "VoiceAcknowledgmentCommand",
+      "type": "object"
+    },
+    "VoiceCompleteCommand": {
+      "additionalProperties": false,
+      "description": "Record browser-observed completion of acknowledgment playback.",
+      "properties": {
+        "commandId": {
+          "format": "uuid",
+          "title": "Commandid",
+          "type": "string"
+        },
+        "idempotencyKey": {
+          "format": "uuid",
+          "title": "Idempotencykey",
+          "type": "string"
+        },
+        "sessionId": {
+          "format": "uuid",
+          "title": "Sessionid",
+          "type": "string"
+        },
+        "timestamp": {
+          "format": "date-time",
+          "title": "Timestamp",
+          "type": "string"
+        },
+        "type": {
+          "const": "voice.complete",
+          "title": "Type",
+          "type": "string"
+        },
+        "turnId": {
+          "format": "uuid",
+          "title": "Turnid",
+          "type": "string"
+        }
+      },
+      "required": [
+        "commandId",
+        "idempotencyKey",
+        "sessionId",
+        "timestamp",
+        "type",
+        "turnId"
+      ],
+      "title": "VoiceCompleteCommand",
+      "type": "object"
+    },
+    "VoiceInterruptCommand": {
+      "additionalProperties": false,
+      "description": "Stop current local playback without implying deep-work cancellation.",
+      "properties": {
+        "commandId": {
+          "format": "uuid",
+          "title": "Commandid",
+          "type": "string"
+        },
+        "idempotencyKey": {
+          "format": "uuid",
+          "title": "Idempotencykey",
+          "type": "string"
+        },
+        "sessionId": {
+          "format": "uuid",
+          "title": "Sessionid",
+          "type": "string"
+        },
+        "timestamp": {
+          "format": "date-time",
+          "title": "Timestamp",
+          "type": "string"
+        },
+        "type": {
+          "const": "voice.interrupt",
+          "title": "Type",
+          "type": "string"
+        },
+        "turnId": {
+          "format": "uuid",
+          "title": "Turnid",
+          "type": "string"
+        },
+        "reason": {
+          "enum": [
+            "barge_in",
+            "user_stop"
+          ],
+          "title": "Reason",
+          "type": "string"
+        }
+      },
+      "required": [
+        "commandId",
+        "idempotencyKey",
+        "sessionId",
+        "timestamp",
+        "type",
+        "turnId",
+        "reason"
+      ],
+      "title": "VoiceInterruptCommand",
+      "type": "object"
+    },
+    "VoiceStartCommand": {
+      "additionalProperties": false,
+      "description": "Record browser-observed acknowledgment playback for an accepted voice turn.",
+      "properties": {
+        "commandId": {
+          "format": "uuid",
+          "title": "Commandid",
+          "type": "string"
+        },
+        "idempotencyKey": {
+          "format": "uuid",
+          "title": "Idempotencykey",
+          "type": "string"
+        },
+        "sessionId": {
+          "format": "uuid",
+          "title": "Sessionid",
+          "type": "string"
+        },
+        "timestamp": {
+          "format": "date-time",
+          "title": "Timestamp",
+          "type": "string"
+        },
+        "type": {
+          "const": "voice.start",
+          "title": "Type",
+          "type": "string"
+        },
+        "turnId": {
+          "format": "uuid",
+          "title": "Turnid",
+          "type": "string"
+        }
+      },
+      "required": [
+        "commandId",
+        "idempotencyKey",
+        "sessionId",
+        "timestamp",
+        "type",
+        "turnId"
+      ],
+      "title": "VoiceStartCommand",
+      "type": "object"
+    }
+  },
+  "discriminator": {
+    "mapping": {
+      "document.revert": "#/$defs/DocumentRevertCommand",
+      "turn.cancel": "#/$defs/TurnCancelCommand",
+      "turn.submit": "#/$defs/TurnSubmitCommand",
+      "voice.acknowledge": "#/$defs/VoiceAcknowledgmentCommand",
+      "voice.complete": "#/$defs/VoiceCompleteCommand",
+      "voice.interrupt": "#/$defs/VoiceInterruptCommand",
+      "voice.start": "#/$defs/VoiceStartCommand"
+    },
+    "propertyName": "type"
+  },
+  "oneOf": [
+    {
+      "$ref": "#/$defs/TurnSubmitCommand"
+    },
+    {
+      "$ref": "#/$defs/TurnCancelCommand"
+    },
+    {
+      "$ref": "#/$defs/VoiceInterruptCommand"
+    },
+    {
+      "$ref": "#/$defs/VoiceStartCommand"
+    },
+    {
+      "$ref": "#/$defs/VoiceAcknowledgmentCommand"
+    },
+    {
+      "$ref": "#/$defs/VoiceCompleteCommand"
+    },
+    {
+      "$ref": "#/$defs/DocumentRevertCommand"
+    }
+  ],
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/dual-channel-voice-agent-pattern/contracts/app-commands.schema.json",
+  "title": "Dual-channel application commands",
+  "x-maxWireBytes": 65536
+}

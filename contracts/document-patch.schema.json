@@ -1,0 +1,344 @@
+{
+  "$defs": {
+    "AppendListItemOperation": {
+      "additionalProperties": false,
+      "description": "Append a classified value; the service creates the stable item ID.",
+      "properties": {
+        "operationId": {
+          "format": "uuid",
+          "title": "Operationid",
+          "type": "string"
+        },
+        "op": {
+          "const": "append_list_item",
+          "title": "Op",
+          "type": "string"
+        },
+        "section": {
+          "enum": [
+            "supportingSignals",
+            "stakeholders",
+            "assumptionsAndUncertainties",
+            "missingEvidence",
+            "recommendedNextActions"
+          ],
+          "title": "Section",
+          "type": "string"
+        },
+        "value": {
+          "$ref": "#/$defs/ClassifiedText"
+        }
+      },
+      "required": [
+        "operationId",
+        "op",
+        "section",
+        "value"
+      ],
+      "title": "AppendListItemOperation",
+      "type": "object"
+    },
+    "ClaimClassification": {
+      "description": "Allowed provenance classification for every opportunity claim.",
+      "enum": [
+        "synthetic_evidence",
+        "inference",
+        "unknown"
+      ],
+      "title": "ClaimClassification",
+      "type": "string"
+    },
+    "ClassifiedText": {
+      "additionalProperties": false,
+      "description": "A claim and its explicit provenance.",
+      "properties": {
+        "text": {
+          "maxLength": 2000,
+          "minLength": 1,
+          "title": "Text",
+          "type": "string"
+        },
+        "classification": {
+          "$ref": "#/$defs/ClaimClassification"
+        },
+        "sourceLabel": {
+          "anyOf": [
+            {
+              "maxLength": 120,
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Sourcelabel"
+        }
+      },
+      "required": [
+        "text",
+        "classification"
+      ],
+      "title": "ClassifiedText",
+      "type": "object"
+    },
+    "RemoveListItemOperation": {
+      "additionalProperties": false,
+      "description": "Remove a known list item by stable ID.",
+      "properties": {
+        "operationId": {
+          "format": "uuid",
+          "title": "Operationid",
+          "type": "string"
+        },
+        "op": {
+          "const": "remove_list_item",
+          "title": "Op",
+          "type": "string"
+        },
+        "section": {
+          "enum": [
+            "supportingSignals",
+            "stakeholders",
+            "assumptionsAndUncertainties",
+            "missingEvidence",
+            "recommendedNextActions"
+          ],
+          "title": "Section",
+          "type": "string"
+        },
+        "itemId": {
+          "format": "uuid",
+          "title": "Itemid",
+          "type": "string"
+        }
+      },
+      "required": [
+        "operationId",
+        "op",
+        "section",
+        "itemId"
+      ],
+      "title": "RemoveListItemOperation",
+      "type": "object"
+    },
+    "ReplaceSectionOperation": {
+      "additionalProperties": false,
+      "description": "Replace one scalar claim section.",
+      "properties": {
+        "operationId": {
+          "format": "uuid",
+          "title": "Operationid",
+          "type": "string"
+        },
+        "op": {
+          "const": "replace_section",
+          "title": "Op",
+          "type": "string"
+        },
+        "section": {
+          "enum": [
+            "customerGoal",
+            "currentSituation",
+            "opportunityHypothesis",
+            "expectedValue",
+            "confidenceAndRationale"
+          ],
+          "title": "Section",
+          "type": "string"
+        },
+        "value": {
+          "$ref": "#/$defs/ClassifiedText"
+        }
+      },
+      "required": [
+        "operationId",
+        "op",
+        "section",
+        "value"
+      ],
+      "title": "ReplaceSectionOperation",
+      "type": "object"
+    },
+    "SetFieldOperation": {
+      "additionalProperties": false,
+      "description": "Set an allowlisted scalar field with field-specific validation.",
+      "properties": {
+        "operationId": {
+          "format": "uuid",
+          "title": "Operationid",
+          "type": "string"
+        },
+        "op": {
+          "const": "set_field",
+          "title": "Op",
+          "type": "string"
+        },
+        "field": {
+          "enum": [
+            "title",
+            "status"
+          ],
+          "title": "Field",
+          "type": "string"
+        },
+        "value": {
+          "maxLength": 160,
+          "minLength": 1,
+          "title": "Value",
+          "type": "string"
+        }
+      },
+      "required": [
+        "operationId",
+        "op",
+        "field",
+        "value"
+      ],
+      "title": "SetFieldOperation",
+      "type": "object"
+    },
+    "UpdateListItemOperation": {
+      "additionalProperties": false,
+      "description": "Replace a known list item while preserving its stable ID.",
+      "properties": {
+        "operationId": {
+          "format": "uuid",
+          "title": "Operationid",
+          "type": "string"
+        },
+        "op": {
+          "const": "update_list_item",
+          "title": "Op",
+          "type": "string"
+        },
+        "section": {
+          "enum": [
+            "supportingSignals",
+            "stakeholders",
+            "assumptionsAndUncertainties",
+            "missingEvidence",
+            "recommendedNextActions"
+          ],
+          "title": "Section",
+          "type": "string"
+        },
+        "itemId": {
+          "format": "uuid",
+          "title": "Itemid",
+          "type": "string"
+        },
+        "value": {
+          "$ref": "#/$defs/ClassifiedText"
+        }
+      },
+      "required": [
+        "operationId",
+        "op",
+        "section",
+        "itemId",
+        "value"
+      ],
+      "title": "UpdateListItemOperation",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Complete atomic semantic patch proposal.",
+  "properties": {
+    "patchId": {
+      "format": "uuid",
+      "title": "Patchid",
+      "type": "string"
+    },
+    "sessionId": {
+      "format": "uuid",
+      "title": "Sessionid",
+      "type": "string"
+    },
+    "turnId": {
+      "format": "uuid",
+      "title": "Turnid",
+      "type": "string"
+    },
+    "documentId": {
+      "format": "uuid",
+      "title": "Documentid",
+      "type": "string"
+    },
+    "baseVersion": {
+      "minimum": 0,
+      "title": "Baseversion",
+      "type": "integer"
+    },
+    "summary": {
+      "maxLength": 500,
+      "minLength": 1,
+      "title": "Summary",
+      "type": "string"
+    },
+    "operations": {
+      "items": {
+        "discriminator": {
+          "mapping": {
+            "append_list_item": "#/$defs/AppendListItemOperation",
+            "remove_list_item": "#/$defs/RemoveListItemOperation",
+            "replace_section": "#/$defs/ReplaceSectionOperation",
+            "set_field": "#/$defs/SetFieldOperation",
+            "update_list_item": "#/$defs/UpdateListItemOperation"
+          },
+          "propertyName": "op"
+        },
+        "oneOf": [
+          {
+            "$ref": "#/$defs/SetFieldOperation"
+          },
+          {
+            "$ref": "#/$defs/ReplaceSectionOperation"
+          },
+          {
+            "$ref": "#/$defs/AppendListItemOperation"
+          },
+          {
+            "$ref": "#/$defs/UpdateListItemOperation"
+          },
+          {
+            "$ref": "#/$defs/RemoveListItemOperation"
+          }
+        ]
+      },
+      "maxItems": 32,
+      "title": "Operations",
+      "type": "array"
+    },
+    "reason": {
+      "anyOf": [
+        {
+          "maxLength": 240,
+          "minLength": 1,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Reason"
+    }
+  },
+  "required": [
+    "patchId",
+    "sessionId",
+    "turnId",
+    "documentId",
+    "baseVersion",
+    "summary",
+    "operations"
+  ],
+  "title": "Atomic opportunity document patch",
+  "type": "object",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/dual-channel-voice-agent-pattern/contracts/document-patch.schema.json",
+  "x-maxWireBytes": 65536
+}

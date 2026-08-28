@@ -1,0 +1,7 @@
+[project]
+name = "dual-channel-voice-agent-pattern"
+version = "0.1.0"
+description = "Reference implementation for independent realtime voice and structured agent-work channels."
+readme = "README.md"
+requires-python = ">=3.11"
+license = "MIT"

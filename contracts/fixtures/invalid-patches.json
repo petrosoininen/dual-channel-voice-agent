@@ -1,0 +1,77 @@
+[
+  {
+    "name": "zero operations without reason",
+    "input": {
+      "patchId": "50000000-0000-4000-8000-000000000011",
+      "sessionId": "10000000-0000-4000-8000-000000000021",
+      "turnId": "20000000-0000-4000-8000-000000000001",
+      "documentId": "30000000-0000-4000-8000-000000000001",
+      "baseVersion": 0,
+      "summary": "Invalid no-op.",
+      "operations": []
+    }
+  },
+  {
+    "name": "unknown operation",
+    "input": {
+      "patchId": "50000000-0000-4000-8000-000000000012",
+      "sessionId": "10000000-0000-4000-8000-000000000021",
+      "turnId": "20000000-0000-4000-8000-000000000001",
+      "documentId": "30000000-0000-4000-8000-000000000001",
+      "baseVersion": 0,
+      "summary": "Invalid operation.",
+      "operations": [
+        {
+          "operationId": "60000000-0000-4000-8000-000000000011",
+          "op": "merge_section",
+          "section": "customerGoal",
+          "value": {
+            "text": "Not allowed.",
+            "classification": "inference"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "name": "unknown section",
+    "input": {
+      "patchId": "50000000-0000-4000-8000-000000000013",
+      "sessionId": "10000000-0000-4000-8000-000000000021",
+      "turnId": "20000000-0000-4000-8000-000000000001",
+      "documentId": "30000000-0000-4000-8000-000000000001",
+      "baseVersion": 0,
+      "summary": "Invalid section.",
+      "operations": [
+        {
+          "operationId": "60000000-0000-4000-8000-000000000012",
+          "op": "replace_section",
+          "section": "pricing",
+          "value": {
+            "text": "Not allowed.",
+            "classification": "unknown"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "name": "mistyped classified value",
+    "input": {
+      "patchId": "50000000-0000-4000-8000-000000000014",
+      "sessionId": "10000000-0000-4000-8000-000000000021",
+      "turnId": "20000000-0000-4000-8000-000000000001",
+      "documentId": "30000000-0000-4000-8000-000000000001",
+      "baseVersion": 0,
+      "summary": "Invalid value.",
+      "operations": [
+        {
+          "operationId": "60000000-0000-4000-8000-000000000013",
+          "op": "append_list_item",
+          "section": "missingEvidence",
+          "value": "A string is not a classified claim."
+        }
+      ]
+    }
+  }
+]

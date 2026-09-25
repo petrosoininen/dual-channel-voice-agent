@@ -1,5 +1,5 @@
 azure-identity==1.25.3
-agent-framework-foundry==1.11.0
+agent-framework-foundry==1.13.1
 azure-ai-projects==2.3.0
 aiohttp==3.14.3
 fastapi==0.141.1
